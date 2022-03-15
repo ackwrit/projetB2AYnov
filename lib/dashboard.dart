@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:projetclass/functions/FirestoreHelper.dart';
+import 'package:projetclass/model/Utilisateur.dart';
 
 class dashboard extends StatefulWidget{
   @override
@@ -20,7 +23,27 @@ class dashboardState extends State<dashboard>{
   }
 
   Widget bodyPage(){
-    return Text("coucou");
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirestoreHelper().fire_user.snapshots(),
+        builder: (context,snapshot){
+        if(!snapshot.hasData){
+          return CircularProgressIndicator();
+        }
+        else
+          {
+            List documents = snapshot.data!.docs;
+            return ListView.builder(
+              itemCount: documents.length,
+                itemBuilder: (context,index){
+                Utilisateur user = Utilisateur(documents[index]);
+                return ListTile(
+                  title: Text("${user.nom}  ${user.prenom}"),
+                );
+                }
+            );
+          }
+        }
+    );
   }
 
 }
