@@ -1,7 +1,11 @@
 
 
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projetclass/dashboard.dart';
 import 'package:projetclass/functions/FirestoreHelper.dart';
 import 'package:projetclass/register.dart';
 
@@ -74,6 +78,44 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
     );
+  }
+
+
+  popUp(){
+    showDialog(
+      barrierDismissible: false,
+        context: context,
+        builder: (context){
+          if(Platform.isIOS){
+            return CupertinoAlertDialog(
+              title: Text("Connexion échoué"),
+              actions: [
+                ElevatedButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    child: Text("Ok")
+                )
+              ],
+            );
+          }
+          else
+            {
+              return AlertDialog(
+                title: Text("Connexion échoué"),
+                actions: [
+                  ElevatedButton(
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                      child: Text("Ok")
+                  )
+                ],
+              );
+            }
+        }
+    );
+
   }
 
 
@@ -156,8 +198,14 @@ class _MyHomePageState extends State<MyHomePage> {
               print("J'ai appuyé");
               FirestoreHelper().Connexion(mail, password).then((value){
                 print("Connexion réussi");
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context){
+                      return dashboard();
+                    }
+                ));
               }).catchError((onError){
                 print("Connexion échoué");
+                popUp();
               });
             },
             child: Text("Connexion")
