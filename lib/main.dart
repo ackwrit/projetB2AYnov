@@ -61,12 +61,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
 
-        child: Container(
-          padding: EdgeInsets.all(20),
-          child: bodyPage(),
-        )
-        
-      ),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              child: bodyPage(),
+            )
+
+        ),
+
+
 
     );
   }
@@ -75,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget bodyPage(){
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         //Afficher notre logo
         Container(
@@ -93,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ),
         ),
+        SizedBox(height: 15,),
 
         //Taper une adresse mail
         TextField(
@@ -109,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
 
         ),
+        SizedBox(height: 15,),
 
 
         //Taper un mot de passe
@@ -126,6 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
 
         ),
+        SizedBox(height: 15,),
 
         //Taper un bouton connexion
         ElevatedButton(
@@ -141,6 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             child: Text("Connexion")
         ),
+        SizedBox(height: 15,),
 
         //Cliquer un lien inscription
         InkWell(
