@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:projetclass/functions/FirestoreHelper.dart';
 import 'package:projetclass/register.dart';
 
 void main() async{
@@ -48,6 +49,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   double maPosition = 0.0;
+  late String mail;
+  late String password;
 
 
   @override
@@ -99,6 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
         //Taper une adresse mail
         TextField(
+          onChanged: (value){
+            setState(() {
+              mail = value;
+            });
+          },
 
           decoration: InputDecoration(
             filled: true,
@@ -117,6 +125,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
         //Taper un mot de passe
         TextField(
+          onChanged: (value){
+            setState(() {
+              password = value;
+            });
+          },
           obscureText: true,
           decoration: InputDecoration(
               filled: true,
@@ -138,11 +151,14 @@ class _MyHomePageState extends State<MyHomePage> {
             primary: Colors.green,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
           ),
-            onLongPress: (){
-            print("J'ai appuyé longtemps");
-            },
+
             onPressed: (){
               print("J'ai appuyé");
+              FirestoreHelper().Connexion(mail, password).then((value){
+                print("Connexion réussi");
+              }).catchError((onError){
+                print("Connexion échoué");
+              });
             },
             child: Text("Connexion")
         ),
