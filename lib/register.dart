@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projetclass/functions/FirestoreHelper.dart';
 
 class register extends StatefulWidget{
   @override
@@ -122,6 +123,7 @@ class registerState extends State <register>{
         ElevatedButton(
             onPressed: () {
               print("Je suis inscris");
+              FirestoreHelper().Inscription(nom, prenom, mail, password);
 
             },
             child: Text("Inscription")
