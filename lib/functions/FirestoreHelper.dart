@@ -16,8 +16,8 @@ class FirestoreHelper{
 
 //Méthode pour l'inscription
 
-  Inscription(){
-
+  Future Inscription(String nom, String prenom, String mail, String password) async {
+    UserCredential user = await auth.createUserWithEmailAndPassword(email: mail, password: password);
 }
 
 

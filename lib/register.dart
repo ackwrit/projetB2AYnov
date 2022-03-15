@@ -10,6 +10,13 @@ class register extends StatefulWidget{
 }
 
 class registerState extends State <register>{
+  //Variable
+  late String mail;
+  late String password;
+  late String nom;
+  late String prenom;
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -34,6 +41,12 @@ class registerState extends State <register>{
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         TextField(
+          onChanged: (value){
+            setState(() {
+              mail = value;
+            });
+
+          },
 
           decoration: InputDecoration(
               filled: true,
@@ -49,6 +62,11 @@ class registerState extends State <register>{
         ),
         TextField(
           obscureText: true,
+          onChanged: (value){
+            setState(() {
+              password = value;
+            });
+          },
 
           decoration: InputDecoration(
               filled: true,
@@ -63,6 +81,11 @@ class registerState extends State <register>{
 
         ),
         TextField(
+          onChanged: (value){
+            setState(() {
+              nom = value;
+            });
+          },
 
           decoration: InputDecoration(
               filled: true,
@@ -77,6 +100,11 @@ class registerState extends State <register>{
 
         ),
         TextField(
+          onChanged: (value){
+            setState(() {
+              prenom = value;
+            });
+          },
 
           decoration: InputDecoration(
               filled: true,
@@ -94,6 +122,7 @@ class registerState extends State <register>{
         ElevatedButton(
             onPressed: () {
               print("Je suis inscris");
+
             },
             child: Text("Inscription")
         )
