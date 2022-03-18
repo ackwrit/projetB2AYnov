@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:projetclass/functions/FirestoreHelper.dart';
 import 'package:projetclass/model/Utilisateur.dart';
@@ -13,6 +14,23 @@ class myDrawer extends StatefulWidget{
 
 class myDrawerState extends State<myDrawer>{
   late Utilisateur myProfil;
+
+
+
+  //Function
+
+  //Récupérer l'image sur notre téléphone
+  getImage() async{
+    FilePickerResult? resultat = await FilePicker.platform.pickFiles(
+      withData: true,
+      type: FileType.image
+    );
+
+  }
+
+
+
+  ///
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -20,7 +38,10 @@ class myDrawerState extends State<myDrawer>{
       setState(() {
         String monId = identifiant;
         FirestoreHelper().getUtilisateur(monId).then((Utilisateur monUser){
-          myProfil = monUser;
+          setState(() {
+            myProfil = monUser;
+          });
+
         });
       });
     });
@@ -34,18 +55,28 @@ class myDrawerState extends State<myDrawer>{
         children: [
           SizedBox(height: 100,),
           //Afficher l'avatar
-          Container(
-            height: 150,
-            width: 150,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: NetworkImage("https://voitures.com/wp-content/uploads/2017/06/Kodiaq_079.jpg.jpg")
-              )
+
+          InkWell(
+            child: Container(
+              height: 150,
+              width: 150,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: (myProfil.avatar == null)?NetworkImage("https://voitures.com/wp-content/uploads/2017/06/Kodiaq_079.jpg.jpg"):NetworkImage(myProfil.avatar!)
+                  )
+              ),
+
             ),
+            onTap: (){
+              //Récuperer image
+              print("Je vais récupérer l'image");
+              getImage();
+            },
 
           ),
+
 
 
           SizedBox(height: 20,),
