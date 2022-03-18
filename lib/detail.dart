@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetclass/model/Utilisateur.dart';
 
 class detail extends StatefulWidget{
+  //Déclarer mon agrument
   Utilisateur user;
   detail({required Utilisateur this.user});
   @override
@@ -18,14 +19,14 @@ class detailState extends State<detail>{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("NOM et prénom de l'utilisateur"),
+        title: Text("${widget.user.prenom}  ${widget.user.nom}"),
       ),
       body: bodyPage(),
     );
   }
 
   Widget bodyPage(){
-    return Text("Détail du profil");
+    return Text("ocuocu");
   }
 
 }
