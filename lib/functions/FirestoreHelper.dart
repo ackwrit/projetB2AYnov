@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:projetclass/model/Utilisateur.dart';
 
 class FirestoreHelper{
   //attributs
@@ -49,6 +50,16 @@ addUser(String uid,Map<String,dynamic>map){
 //Méthode pour update un utilisateur
 updateUser(String uid,Map<String,dynamic> map){
     fire_user.doc(uid).update(map);
+}
+
+Future <String> getIdentifiant() async {
+    String uid = auth.currentUser!.uid;
+    return uid;
+}
+
+Future <Utilisateur> getUtilisateur(String uid) async{
+    DocumentSnapshot snapshot = await fire_user.doc(uid).get();
+    return Utilisateur(snapshot);
 }
 
 

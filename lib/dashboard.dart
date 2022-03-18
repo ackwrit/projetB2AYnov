@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:projetclass/detail.dart';
 import 'package:projetclass/functions/FirestoreHelper.dart';
 import 'package:projetclass/model/Utilisateur.dart';
+import 'package:projetclass/myWidgets/Mydrawer.dart';
 
 class dashboard extends StatefulWidget{
   @override
@@ -18,7 +19,7 @@ class dashboardState extends State<dashboard>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      drawer: Text("Je suis un Drawer"),
+      drawer: myDrawer(),
       appBar: AppBar(),
       body: bodyPage(),
     );

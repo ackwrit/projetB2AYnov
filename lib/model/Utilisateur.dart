@@ -9,6 +9,7 @@ class Utilisateur{
   DateTime? birthday;
   late String mail;
   String? telephone;
+  String? avatar;
 
 
   //Constructeur
@@ -21,6 +22,7 @@ Utilisateur(DocumentSnapshot snapshot){
   Timestamp? timestamp = map["BIRTHDAY"];
   birthday = timestamp?.toDate();
   telephone = map["TELEPHONE"];
+  avatar = map["AVATAR"];
 
 }
 
