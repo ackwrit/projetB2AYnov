@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:projetclass/functions/FirestoreHelper.dart';
@@ -13,7 +15,10 @@ class myDrawer extends StatefulWidget{
 }
 
 class myDrawerState extends State<myDrawer>{
-  late Utilisateur myProfil;
+  Utilisateur myProfil = Utilisateur.vide();
+  Uint8List? byteFile;
+  String? nameFile;
+  String? urlFile;
 
 
 
@@ -25,7 +30,54 @@ class myDrawerState extends State<myDrawer>{
       withData: true,
       type: FileType.image
     );
+    if(resultat != null){
+      nameFile = resultat.files.first.name;
+      byteFile = resultat.files.first.bytes;
+      popImage();
+    }
 
+  }
+  
+  //Afficher l'image choisie
+  popImage(){
+    showDialog(
+        context: context, 
+        builder: (context){
+          return AlertDialog(
+            title: Text("Voulez-vous enrgistrer cette image"),
+            content: Image.memory(byteFile!),
+            actions: [
+              ElevatedButton(
+                  onPressed: (){
+                    //Annuler
+                    Navigator.pop(context);
+                  },
+                  child: Text("Annuler"),
+              ),
+              ElevatedButton(
+                  onPressed: (){
+                    //enregsiter notre image dans la base de donnée
+                    FirestoreHelper().stockageImage(nameFile!, byteFile!).then((String urlImage){
+                      setState(() {
+                        urlFile = urlImage;
+                      });
+                    });
+                    Map<String,dynamic> map = {
+                      "AVATAR":urlFile,
+                    };
+                    FirestoreHelper().updateUser(myProfil.uid, map);
+                    Navigator.pop(context);
+
+                  },
+                  child: Text("Enregisterment")
+              )
+
+
+            ],
+          );
+        }
+    );
+    
   }
 
 

@@ -13,6 +13,8 @@ class Utilisateur{
 
 
   //Constructeur
+  Utilisateur.vide();
+
 Utilisateur(DocumentSnapshot snapshot){
   uid = snapshot.id;
   Map<String,dynamic> map = snapshot.data() as Map<String,dynamic>;
