@@ -60,12 +60,13 @@ class myDrawerState extends State<myDrawer>{
                     FirestoreHelper().stockageImage(nameFile!, byteFile!).then((String urlImage){
                       setState(() {
                         urlFile = urlImage;
+                        Map<String,dynamic> map = {
+                          "AVATAR":urlFile,
+                        };
+                        FirestoreHelper().updateUser(myProfil.uid, map);
                       });
                     });
-                    Map<String,dynamic> map = {
-                      "AVATAR":urlFile,
-                    };
-                    FirestoreHelper().updateUser(myProfil.uid, map);
+
                     Navigator.pop(context);
 
                   },
