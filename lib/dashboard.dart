@@ -36,9 +36,16 @@ class dashboardState extends State<dashboard>{
               itemCount: documents.length,
                 itemBuilder: (context,index){
                 Utilisateur user = Utilisateur(documents[index]);
-                return ListTile(
-                  title: Text("${user.nom}  ${user.prenom}"),
+                return Card(
+                  elevation: 5.0,
+                  child: ListTile(
+                    title: Text("${user.nom}  ${user.prenom}"),
+                    trailing: IconButton(onPressed: (){
+                      //modofier des élements
+                    }, icon: Icon(Icons.edit))
+                  ),
                 );
+
                 }
             );
           }
