@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:projetclass/detail.dart';
 import 'package:projetclass/functions/FirestoreHelper.dart';
 import 'package:projetclass/model/Utilisateur.dart';
 
@@ -39,6 +40,14 @@ class dashboardState extends State<dashboard>{
                 return Card(
                   elevation: 5.0,
                   child: ListTile(
+                    onTap: (){
+                      //Navigation vers la page détail avec comme argument Utilisateur
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context){
+                            return detail(user: user);
+                          }
+                      ));
+                    },
                     title: Text("${user.nom}  ${user.prenom}"),
                     trailing: IconButton(onPressed: (){
                       //modofier des élements
